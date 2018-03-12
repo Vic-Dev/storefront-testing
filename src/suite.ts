@@ -14,9 +14,8 @@ namespace Suite {
   export const extendable = <T extends FullUtils>(extend: (utils: FullUtils) => T) =>
     (chai: Chai.ChaiStatic) =>
       suite<T, any>((userTests) => {
-        let sandbox: sinon.SinonSandbox;
+        const sandbox: sinon.SinonSandbox = sinon.sandbox.create();
 
-        beforeEach(() => sandbox = sinon.sandbox.create());
         afterEach(() => sandbox.restore());
 
         const utils = {
